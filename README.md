@@ -4,6 +4,7 @@ from https://docs.vultr.com/how-to-set-up-a-jupyterlab-environment-on-ubuntu-22-
 
 <h3>Install the Required Packages</h3>
 
+sudo apt-get install python3-pip
 sudo pip install -U jupyterlab
 
 <h3>Configure the JupyterLab Server</h3>
