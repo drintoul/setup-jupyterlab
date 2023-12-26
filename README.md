@@ -14,9 +14,8 @@ jupyter lab --generate-config
 
 nano ~/.jupyter/jupyter_lab_config.py
 
-c.ServerApp.password = 'PASSWORD_HASH'
-
-c.ServerApp.allow_remote_access = True
+  c.ServerApp.password = 'PASSWORD_HASH'
+  c.ServerApp.allow_remote_access = True
 
 sudo ufw disable
 
@@ -26,25 +25,18 @@ jupyter lab --ip 0.0.0.0
 
 sudo nano /lib/systemd/system/jupyterlab.service
 
-[Unit]
+  [Unit]
+  Description=JupyterLab Server
 
-Description=JupyterLab Server
+  [Service]
+  User=USER
+  Group=USER
+  WorkingDirectory=/home/USER/jupyterlab
+  Environment="PATH=VIRTUAL_ENV_PATH_HERE"
+  ExecStart=/usr/local/bin/jupyter-lab --config=/home/USER/.jupyter/jupyter_lab_config.py
 
-[Service]
-
-User=USER
-
-Group=USER
-
-WorkingDirectory=/home/USER/jupyterlab
-
-Environment="PATH=VIRTUAL_ENV_PATH_HERE"
-
-ExecStart=/usr/local/bin/jupyter-lab --config=/home/USER/.jupyter/jupyter_lab_config.py
-
-[Install]
-
-WantedBy=multi-user.target
+  [Install]
+  WantedBy=multi-user.target
 
 mkdir ~/jupyterlab
 
