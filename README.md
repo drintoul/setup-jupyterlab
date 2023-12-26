@@ -5,6 +5,13 @@ from https://docs.vultr.com/how-to-set-up-a-jupyterlab-environment-on-ubuntu-22-
 <h3>Install the Required Packages</h3>
 
 sudo apt-get install python3-pip
+
+sudo pip install -U virtualenv
+virtualenv --system-site-packages -p python3 jupyterlab_env
+source jupyterlab_env/bin/activate
+pip install --upgrade pip
+deactivate
+
 sudo pip install -U jupyterlab
 
 <h3>Configure the JupyterLab Server</h3>
@@ -21,6 +28,16 @@ nano ~/.jupyter/jupyter_lab_config.py
 sudo ufw disable
 
 jupyter lab --ip 0.0.0.0
+
+<h3>Isolate the Jupyter Kernel</h3>
+
+sudo python3 -m pip uninstall ipykernel
+source jupyterlab_env/bin/activate
+
+pip install ipykernel
+python3 -m ipykernel install --user --name=venvpy3
+
+deactivate
 
 <h3>Daemonize the JupyterLab Server</h3>
 
